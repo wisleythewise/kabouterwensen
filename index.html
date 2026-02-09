@@ -26,7 +26,7 @@ h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:10px;letter-
 .cs{font-family:'Spectral',serif;font-weight:200;font-style:italic;font-size:13px;color:#999;letter-spacing:.08em;margin-bottom:35px}
 .cl{width:50px;height:.5px;background:#ccc;margin:22px auto}
 .ca{font-family:'Spectral',serif;font-weight:200;font-style:italic;font-size:12px;color:#bbb;letter-spacing:.06em}
-.bot{position:absolute;opacity:.07;pointer-events:none}
+.bot{position:absolute;opacity:.18;pointer-events:none}
 .rn{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:10px;letter-spacing:.3em;color:#ccc;text-transform:uppercase;margin-bottom:10px}
 .rt{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:22px;letter-spacing:.1em;color:#2c2c2c;text-transform:uppercase;margin-bottom:14px;line-height:1.2}
 .rs{font-family:'Spectral',serif;font-weight:200;font-style:italic;font-size:12px;line-height:1.75;color:#888;margin-bottom:16px;padding-left:14px;border-left:.5px solid #ddd}
@@ -37,9 +37,11 @@ h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:10px;letter-
 .sl{list-style:none;counter-reset:step}
 .sl li{counter-increment:step;font-family:'Spectral',serif;font-weight:300;font-size:10.5px;color:#666;padding:2px 0 2px 22px;position:relative;line-height:1.55}
 .sl li::before{content:counter(step);position:absolute;left:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:13px;color:#ccc}
-.pp{padding:30px;display:flex;flex-direction:column;gap:8px;height:100%}
-.pm{flex:1;border-radius:3px;overflow:hidden;min-height:0}
+.pp{padding:30px;display:flex;flex-direction:column;gap:8px;height:100%;position:relative}
+.pm{flex:1;border-radius:3px;overflow:hidden;min-height:0;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:transform .3s}
+.pm:hover{transform:scale(1.02)!important;z-index:5}
 .pm img{width:100%;height:100%;object-fit:contain;display:block;background:#fafafa}
+.scattered{position:absolute!important;flex:none!important;width:380px!important;height:280px!important;box-shadow:0 6px 20px rgba(0,0,0,.2)!important}
 .pr{display:flex;gap:8px}
 .ph{flex:1;border-radius:3px;overflow:hidden;height:130px}
 .ph img{width:100%;height:100%;object-fit:contain;display:block;background:#fafafa}
@@ -58,14 +60,15 @@ h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:10px;letter-
 .cc p{font-family:'Spectral',serif;font-weight:200;font-style:italic;font-size:14px;line-height:2;color:#999;max-width:300px}
 .cc .so{margin-top:28px;font-size:11px;color:#ccc;letter-spacing:.15em;text-transform:uppercase;font-style:normal;font-family:'Cormorant Garamond',serif}
 @media(max-width:768px){
-body{padding:10px}
-.book-wrapper{width:98vw;height:auto;min-height:70vh}
-.spread{grid-template-columns:1fr;gap:20px;position:relative;padding:10px 0}
-.spread:not(.cover-spread){grid-template-rows:auto auto}
+body{padding:10px;overflow-x:hidden}
+.book-wrapper{width:98vw;height:auto;min-height:75vh}
+.spread{grid-template-columns:1fr;gap:0;position:relative;padding:0}
 .spread:not(.cover-spread)::after{display:none}
-.page-left,.page-right{border-radius:6px;box-shadow:0 2px 12px rgba(0,0,0,.08);margin-bottom:10px}
-.pc{padding:20px 16px}
-.pp{padding:20px}
+.spread:not(.cover-spread){display:block}
+.page-left{border-radius:6px;box-shadow:0 2px 12px rgba(0,0,0,.08);width:100%;min-height:72vh;display:block!important}
+.page-right{display:none!important}
+.pc{padding:22px 18px}
+.pp{padding:18px;overflow:visible;position:relative}
 .rt{font-size:18px}
 .rs{font-size:11px;line-height:1.6}
 .il{columns:1;column-gap:0}
@@ -78,14 +81,16 @@ body{padding:10px}
 .pn.l{left:16px}
 .pn.r{right:16px}
 .nav-bar{margin-top:15px;gap:20px}
-.nb{width:36px;height:36px;font-size:14px}
-.ni{font-size:9px;min-width:70px}
-.bot{transform:scale(0.7);opacity:.05!important}
+.nb{width:40px;height:40px;font-size:16px}
+.ni{font-size:10px;min-width:80px}
+.bot{transform:scale(0.9);opacity:.14!important}
 .is{gap:4px}
 .ii{height:40px}
 .ph{height:100px}
 .cc{padding:30px 20px}
 .cc p{font-size:12px;line-height:1.8}
+.scattered{width:85vw!important;height:auto!important;max-height:50vh!important;position:relative!important;top:auto!important;left:auto!important;transform:rotate(0deg)!important;margin:8px auto!important;z-index:1!important;box-shadow:0 4px 16px rgba(0,0,0,.15)!important}
+.scattered img{object-fit:contain!important}
 }
 </style>
 </head>
@@ -120,15 +125,14 @@ body{padding:10px}
 <p style="font-weight:200;font-style:italic;font-size:11px;color:#bbb">Kook ze, proef ze, en denk aan mama.</p>
 <span class="pn l">1</span>
 <!-- cute little flower -->
-<svg class="bot" style="bottom:32px;right:26px;width:26px;height:24px;opacity:.07" viewBox="0 0 28 26"><circle cx="14" cy="10" r="2.5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="10" cy="7" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="18" cy="7" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="11" cy="13" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="17" cy="13" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="14" cy="10" r="1" fill="#2c2c2c"/><line x1="14" y1="12" x2="14" y2="22" stroke="#2c2c2c" stroke-width="0.8"/></svg>
+<svg class="bot" style="bottom:32px;right:26px;width:26px;height:24px;opacity:.22" viewBox="0 0 28 26"><circle cx="14" cy="10" r="2.5" fill="#87CEEB" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="10" cy="7" r="2" fill="#87CEEB" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="18" cy="7" r="2" fill="#87CEEB" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="11" cy="13" r="2" fill="#87CEEB" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="17" cy="13" r="2" fill="#87CEEB" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="14" cy="10" r="1" fill="#FFD700"/><line x1="14" y1="12" x2="14" y2="22" stroke="#228B22" stroke-width="0.9"/></svg>
 </div>
 </div>
 <div class="page page-right"><div class="pp">
-<div class="pm" style="flex:1.5"><img src="img/mama-kids.jpeg"></div>
-<div class="pcap">mama's kabouters</div>
-<div class="pr"><div class="ph"><img src="img/baby-klein.jpeg" style="object-position:center top"></div><div class="ph"><img src="img/baby-portret.jpeg"></div></div>
+<div class="pm scattered" style="top:20px;left:10px;transform:rotate(-3deg);z-index:1;width:400px!important;height:290px!important"><img src="img/mama-kids.jpeg"></div>
+<div class="pm scattered" style="top:220px;left:80px;transform:rotate(4deg);z-index:2;width:350px!important;height:260px!important"><img src="img/zwembad.jpeg"></div>
 <!-- tiny bird perched -->
-<svg class="bot" style="top:20px;left:20px;width:24px;height:20px;opacity:.06" viewBox="0 0 26 22"><circle cx="13" cy="8" r="5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="17" cy="7" r="3.5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="12" cy="7" r="1" fill="#2c2c2c"/><path d="M10,11 L9,15 M14,11 L14,15" stroke="#2c2c2c" stroke-width="0.7"/></svg>
+<svg class="bot" style="top:20px;left:20px;width:24px;height:20px;opacity:.22" viewBox="0 0 26 22"><circle cx="13" cy="8" r="5" fill="#FFE4B5" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="17" cy="7" r="3.5" fill="#FFDAB9" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="12" cy="7" r="1" fill="#2c2c2c"/><path d="M10,11 L9,15 M14,11 L14,15" stroke="#FF8C00" stroke-width="0.8"/></svg>
 <span class="pn r">2</span>
 </div></div>
 </div>
@@ -143,14 +147,13 @@ body{padding:10px}
 <div class="rsec"><h3>Bereiding</h3><ol class="sl"><li>Meng bloem, bakpoeder, zout en olie. Voeg langzaam water toe en kneed tot soepel deeg. Laat 30 min rusten.</li><li>Marineer de kip met masala, knoflook, zout en ketjap. Minimaal 1 uur.</li><li>Fruit de ui, voeg kip toe en bak aan. Voeg water toe en laat sudderen.</li><li>Voeg aardappelblokjes toe en laat 25 min zachtjes koken.</li><li>Rol deeg uit, bestrijk met olie, vouw op, rol opnieuw. Bak in droge pan met boter.</li></ol></div>
 <span class="pn l">3</span>
 <!-- cute bird drawing -->
-<svg class="bot" style="top:25px;right:22px;width:32px;height:28px;opacity:.08" viewBox="0 0 35 30"><circle cx="12" cy="12" r="8" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="18" cy="10" r="5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="10" cy="11" r="1.5" fill="#2c2c2c"/><path d="M18,10 L25,8" stroke="#2c2c2c" stroke-width="0.8"/><path d="M18,11 L25,13" stroke="#2c2c2c" stroke-width="0.8"/><path d="M8,18 L6,22 M12,18 L12,23 M16,17 L18,22" stroke="#2c2c2c" stroke-width="0.7"/></svg>
+<svg class="bot" style="top:25px;right:22px;width:32px;height:28px;opacity:.25" viewBox="0 0 35 30"><circle cx="12" cy="12" r="8" fill="#FFE5B4" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="18" cy="10" r="5" fill="#FFD700" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="10" cy="11" r="1.5" fill="#2c2c2c"/><path d="M18,10 L25,8" stroke="#FF6B6B" stroke-width="1.2"/><path d="M18,11 L25,13" stroke="#FF6B6B" stroke-width="1.2"/><path d="M8,18 L6,22 M12,18 L12,23 M16,17 L18,22" stroke="#8B4513" stroke-width="0.8"/></svg>
 </div></div>
 <div class="page page-right"><div class="pp">
-<div class="pm" style="flex:2"><img src="img/baby-vuistje.jpeg"></div>
-<div class="pcap">altijd al een stoere kabouter</div>
-<div class="pm" style="flex:1"><img src="img/zwembad.jpeg"></div>
+<div class="pm scattered" style="top:10px;left:15px;transform:rotate(2deg);z-index:2;width:400px!important;height:300px!important"><img src="img/baby-vuistje.jpeg"></div>
+<div class="pm scattered" style="top:230px;left:100px;transform:rotate(-5deg);z-index:1;width:340px!important;height:250px!important"><img src="img/kruiden.jpeg"></div>
 <!-- tiny tree -->
-<svg class="bot" style="bottom:18px;left:18px;width:22px;height:28px;opacity:.06" viewBox="0 0 24 30"><line x1="12" y1="28" x2="12" y2="14" stroke="#2c2c2c" stroke-width="0.9"/><circle cx="12" cy="10" r="6" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="8" cy="7" r="4" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="16" cy="7" r="4" fill="none" stroke="#2c2c2c" stroke-width="0.8"/></svg>
+<svg class="bot" style="bottom:18px;left:18px;width:22px;height:28px;opacity:.22" viewBox="0 0 24 30"><line x1="12" y1="28" x2="12" y2="14" stroke="#8B4513" stroke-width="1.1"/><circle cx="12" cy="10" r="6" fill="#98FB98" stroke="#228B22" stroke-width="0.8"/><circle cx="8" cy="7" r="4" fill="#90EE90" stroke="#228B22" stroke-width="0.8"/><circle cx="16" cy="7" r="4" fill="#90EE90" stroke="#228B22" stroke-width="0.8"/></svg>
 <span class="pn r">4</span>
 </div></div>
 </div>
@@ -165,14 +168,13 @@ body{padding:10px}
 <div class="rsec"><h3>Bereiding</h3><ol class="sl"><li>Kook de kip gaar met ui, tomaat en kruiden. Bewaar het kookvocht. Scheur het vlees.</li><li>Schil de pomtajer en rasp fijn. Meng direct met citroensap.</li><li>Meng geraspte pomtajer met sinaasappelsap, nootmuskaat, tomatenpuree, zout en peper.</li><li>Vet ovenschaal in. Helft pomtajer, dan kip, dan de rest. Kookvocht erover, boter bovenop.</li><li>Bak 1,5 uur op 180°C tot goudbruin en knapperig.</li></ol></div>
 <span class="pn l">5</span>
 <!-- cute flower drawing -->
-<svg class="bot" style="top:28px;right:24px;width:28px;height:32px;opacity:.08" viewBox="0 0 30 35"><circle cx="15" cy="12" r="3" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="10" cy="8" r="2.5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="20" cy="8" r="2.5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="11" cy="16" r="2.5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="19" cy="16" r="2.5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="15" cy="12" r="1.5" fill="#2c2c2c"/><line x1="15" y1="15" x2="15" y2="30" stroke="#2c2c2c" stroke-width="0.8"/><path d="M15,22 Q11,20 10,23" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><path d="M15,25 Q19,23 20,26" fill="none" stroke="#2c2c2c" stroke-width="0.7"/></svg>
+<svg class="bot" style="top:28px;right:24px;width:28px;height:32px;opacity:.25" viewBox="0 0 30 35"><circle cx="15" cy="12" r="3" fill="#FFB6C1" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="10" cy="8" r="2.5" fill="#FFB6C1" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="20" cy="8" r="2.5" fill="#FFB6C1" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="11" cy="16" r="2.5" fill="#FFB6C1" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="19" cy="16" r="2.5" fill="#FFB6C1" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="15" cy="12" r="1.5" fill="#FFD700"/><line x1="15" y1="15" x2="15" y2="30" stroke="#228B22" stroke-width="1"/><path d="M15,22 Q11,20 10,23" fill="none" stroke="#228B22" stroke-width="0.8"/><path d="M15,25 Q19,23 20,26" fill="none" stroke="#228B22" stroke-width="0.8"/></svg>
 </div></div>
 <div class="page page-right"><div class="pp">
-<div class="pm" style="flex:1"><img src="img/mama-straat.jpeg" style="object-position:center top"></div>
-<div class="pcap">mama en haar kabouter</div>
-<div class="pm" style="flex:1"><img src="img/mama-kus.jpeg" style="object-position:center top"></div>
+<div class="pm scattered" style="top:15px;left:20px;transform:rotate(-4deg);z-index:1;width:390px!important;height:290px!important"><img src="img/mama-straat.jpeg"></div>
+<div class="pm scattered" style="top:220px;left:95px;transform:rotate(3deg);z-index:2;width:350px!important;height:265px!important"><img src="img/erwten.jpeg"></div>
 <!-- cute flower bunch -->
-<svg class="bot" style="bottom:18px;right:20px;width:20px;height:24px;opacity:.06" viewBox="0 0 22 26"><circle cx="7" cy="6" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="11" cy="5" r="2.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="15" cy="7" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><line x1="7" y1="8" x2="9" y2="20" stroke="#2c2c2c" stroke-width="0.6"/><line x1="11" y1="7.5" x2="11" y2="22" stroke="#2c2c2c" stroke-width="0.6"/><line x1="15" y1="9" x2="13" y2="19" stroke="#2c2c2c" stroke-width="0.6"/></svg>
+<svg class="bot" style="bottom:18px;right:20px;width:20px;height:24px;opacity:.22" viewBox="0 0 22 26"><circle cx="7" cy="6" r="2" fill="#DDA0DD" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="11" cy="5" r="2.5" fill="#EE82EE" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="15" cy="7" r="2" fill="#DA70D6" stroke="#2c2c2c" stroke-width="0.7"/><line x1="7" y1="8" x2="9" y2="20" stroke="#228B22" stroke-width="0.8"/><line x1="11" y1="7.5" x2="11" y2="22" stroke="#228B22" stroke-width="0.8"/><line x1="15" y1="9" x2="13" y2="19" stroke="#228B22" stroke-width="0.8"/></svg>
 <span class="pn r">6</span>
 </div></div>
 </div>
@@ -187,14 +189,13 @@ body{padding:10px}
 <div class="rsec"><h3>Bereiding</h3><ol class="sl"><li>Verwarm de oven op 180°C. Vet een cakevorm in met boter.</li><li>Meng cassave, kokos, suiker, kaneel en nootmuskaat in een grote kom.</li><li>Klop eieren los, meng met kokosmelk, gesmolten boter en vanille.</li><li>Voeg nat bij droog, roer goed door. Voeg rozijnen toe.</li><li>Giet in de vorm. Bak 60-75 min tot goudbruin. Laat afkoelen!</li></ol></div>
 <span class="pn l">7</span>
 <!-- cute tree drawing -->
-<svg class="bot" style="top:24px;right:20px;width:30px;height:42px;opacity:.08" viewBox="0 0 32 45"><line x1="16" y1="43" x2="16" y2="18" stroke="#2c2c2c" stroke-width="1"/><circle cx="16" cy="12" r="7" fill="none" stroke="#2c2c2c" stroke-width="0.9"/><circle cx="11" cy="8" r="5" fill="none" stroke="#2c2c2c" stroke-width="0.9"/><circle cx="21" cy="8" r="5" fill="none" stroke="#2c2c2c" stroke-width="0.9"/><circle cx="10" cy="14" r="4" fill="none" stroke="#2c2c2c" stroke-width="0.9"/><circle cx="22" cy="14" r="4" fill="none" stroke="#2c2c2c" stroke-width="0.9"/></svg>
+<svg class="bot" style="top:24px;right:20px;width:30px;height:42px;opacity:.25" viewBox="0 0 32 45"><line x1="16" y1="43" x2="16" y2="18" stroke="#8B4513" stroke-width="1.2"/><circle cx="16" cy="12" r="7" fill="#90EE90" stroke="#228B22" stroke-width="0.9"/><circle cx="11" cy="8" r="5" fill="#90EE90" stroke="#228B22" stroke-width="0.9"/><circle cx="21" cy="8" r="5" fill="#90EE90" stroke="#228B22" stroke-width="0.9"/><circle cx="10" cy="14" r="4" fill="#7CFC00" stroke="#228B22" stroke-width="0.9"/><circle cx="22" cy="14" r="4" fill="#7CFC00" stroke="#228B22" stroke-width="0.9"/></svg>
 </div></div>
 <div class="page page-right"><div class="pp">
-<div class="pm" style="flex:2"><img src="img/cookie-kus.jpeg"></div>
-<div class="pcap">kreeg ik vandaag van cookie ♡</div>
-<div class="pm" style="flex:1"><img src="img/knuffel.jpeg" style="object-position:center top"></div>
+<div class="pm scattered" style="top:10px;left:12px;transform:rotate(3deg);z-index:2;width:405px!important;height:305px!important"><img src="img/cookie-kus.jpeg"></div>
+<div class="pm scattered" style="top:235px;left:105px;transform:rotate(-4deg);z-index:1;width:335px!important;height:245px!important"><img src="img/chilipepers.jpeg"></div>
 <!-- tiny bird -->
-<svg class="bot" style="top:22px;right:18px;width:22px;height:18px;opacity:.06" viewBox="0 0 24 20"><circle cx="11" cy="8" r="5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="15" cy="7" r="3.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="10" cy="7.5" r="1" fill="#2c2c2c"/><path d="M15,7 L19,5" stroke="#2c2c2c" stroke-width="0.6"/></svg>
+<svg class="bot" style="top:22px;right:18px;width:22px;height:18px;opacity:.22" viewBox="0 0 24 20"><circle cx="11" cy="8" r="5" fill="#F0E68C" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="15" cy="7" r="3.5" fill="#FFD700" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="10" cy="7.5" r="1" fill="#2c2c2c"/><path d="M15,7 L19,5" stroke="#FFA500" stroke-width="0.8"/></svg>
 <span class="pn r">8</span>
 </div></div>
 </div>
@@ -209,15 +210,13 @@ body{padding:10px}
 <div class="rsec"><h3>Bereiding</h3><ol class="sl"><li>Was de rijst goed en laat uitlekken.</li><li>Fruit ui en knoflook. Voeg tomatenpuree en tomaten toe.</li><li>Voeg gerookte kip en garnalen toe, bak kort mee.</li><li>Voeg rijst, bonen, kokosmelk en water toe. Breng aan de kook.</li><li>Vuur laag, dek af, stoom 25 min. Roer met vork. Garneer met selderij.</li></ol></div>
 <span class="pn l">9</span>
 <!-- cute bird on branch -->
-<svg class="bot" style="top:26px;right:22px;width:30px;height:26px;opacity:.08" viewBox="0 0 32 28"><line x1="2" y1="16" x2="30" y2="16" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="18" cy="10" r="6" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="23" cy="8" r="4" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="17" cy="9" r="1.2" fill="#2c2c2c"/><path d="M23,8 L28,6" stroke="#2c2c2c" stroke-width="0.7"/><path d="M16,14 L16,16 M20,13 L20,16" stroke="#2c2c2c" stroke-width="0.7"/></svg>
+<svg class="bot" style="top:26px;right:22px;width:30px;height:26px;opacity:.25" viewBox="0 0 32 28"><line x1="2" y1="16" x2="30" y2="16" stroke="#8B4513" stroke-width="1"/><circle cx="18" cy="10" r="6" fill="#87CEEB" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="23" cy="8" r="4" fill="#ADD8E6" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="17" cy="9" r="1.2" fill="#2c2c2c"/><path d="M23,8 L28,6" stroke="#4682B4" stroke-width="0.9"/><path d="M16,14 L16,16 M20,13 L20,16" stroke="#FF8C00" stroke-width="0.8"/></svg>
 </div></div>
 <div class="page page-right"><div class="pp">
-<div class="pr" style="flex:1"><div class="ph" style="height:auto"><img src="img/strand.jpeg"></div><div class="ph" style="height:auto"><img src="img/baby-vuistje.jpeg"></div></div>
-<div class="pcap">van klein tot groot</div>
-<div class="pm" style="flex:1"><img src="img/zwembad.jpeg"></div>
-<div class="pcap">waterpret in de tuin</div>
+<div class="pm scattered" style="top:18px;left:18px;transform:rotate(-2deg);z-index:1;width:395px!important;height:295px!important"><img src="img/strand.jpeg"></div>
+<div class="pm scattered" style="top:225px;left:90px;transform:rotate(5deg);z-index:2;width:345px!important;height:260px!important"><img src="img/peultjes.jpeg"></div>
 <!-- tiny tree -->
-<svg class="bot" style="top:20px;left:18px;width:20px;height:26px;opacity:.06" viewBox="0 0 22 28"><line x1="11" y1="26" x2="11" y2="13" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="11" cy="9" r="5.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="7" cy="6" r="3.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="15" cy="6" r="3.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/></svg>
+<svg class="bot" style="top:20px;left:18px;width:20px;height:26px;opacity:.15" viewBox="0 0 22 28"><line x1="11" y1="26" x2="11" y2="13" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="11" cy="9" r="5.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="7" cy="6" r="3.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="15" cy="6" r="3.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/></svg>
 <span class="pn r">10</span>
 </div></div>
 </div>
@@ -230,17 +229,15 @@ body{padding:10px}
 <div class="rs">Als het buiten koud en grijs was in Amsterdam, was saoto onze zonneschijn in een kom. Met alle toppings op tafel was het een feestje — iedereen maakte zijn eigen bordje. En ja, jullie deden altijd véél te veel taugé. Maar dat mocht.</div>
 <div class="rsec"><h3>Ingrediënten</h3><ul class="il"><li>1 hele kip</li><li>2L water</li><li>4 teentjes knoflook</li><li>1 stuk gember (5cm)</li><li>2 stengels sereh</li><li>3 salam blaadjes</li><li>1 el koenjit poeder</li><li>Selderij & bieslook</li><li>Zout & peper</li><li>Taugé, gebakken uitjes</li><li>Rijst & ei (topping)</li><li>Ketjap & sambal</li></ul></div>
 <div class="rsec"><h3>Bereiding</h3><ol class="sl"><li>Kook de kip in ruim water met knoflook, gember, sereh en salam. Schep schuim af.</li><li>Laat 45 min trekken. Haal kip eruit en scheur het vlees.</li><li>Zeef de bouillon. Voeg koenjit, zout en peper toe.</li><li>Voeg kipvlees terug en laat 10 min trekken.</li><li>Serveer met rijst, taugé, ei, gebakken uitjes en ketjap.</li></ol></div>
-<div class="is"><div class="ii"><img src="img/pepers-knoflook.jpeg"></div><div class="ii"><img src="img/peultjes.jpeg"></div></div>
 <span class="pn l">11</span>
 <!-- cute flowers bunch -->
-<svg class="bot" style="top:28px;right:22px;width:26px;height:30px;opacity:.08" viewBox="0 0 28 32"><circle cx="8" cy="8" r="2.5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="14" cy="6" r="3" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="20" cy="9" r="2.5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="8" cy="8" r="1" fill="#2c2c2c"/><circle cx="14" cy="6" r="1" fill="#2c2c2c"/><circle cx="20" cy="9" r="1" fill="#2c2c2c"/><line x1="8" y1="10" x2="10" y2="26" stroke="#2c2c2c" stroke-width="0.7"/><line x1="14" y1="9" x2="14" y2="28" stroke="#2c2c2c" stroke-width="0.7"/><line x1="20" y1="11" x2="18" y2="25" stroke="#2c2c2c" stroke-width="0.7"/></svg>
+<svg class="bot" style="top:28px;right:22px;width:26px;height:30px;opacity:.25" viewBox="0 0 28 32"><circle cx="8" cy="8" r="2.5" fill="#FF69B4" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="14" cy="6" r="3" fill="#FFB6C1" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="20" cy="9" r="2.5" fill="#FF1493" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="8" cy="8" r="1" fill="#FFD700"/><circle cx="14" cy="6" r="1" fill="#FFD700"/><circle cx="20" cy="9" r="1" fill="#FFD700"/><line x1="8" y1="10" x2="10" y2="26" stroke="#228B22" stroke-width="0.9"/><line x1="14" y1="9" x2="14" y2="28" stroke="#228B22" stroke-width="0.9"/><line x1="20" y1="11" x2="18" y2="25" stroke="#228B22" stroke-width="0.9"/></svg>
 </div></div>
 <div class="page page-right"><div class="pp">
-<div class="pm" style="flex:1.5"><img src="img/baby-klein.jpeg"></div>
-<div class="pcap">die oogjes... altijd nieuwsgierig</div>
-<div class="pm" style="flex:1"><img src="img/baby-portret.jpeg"></div>
+<div class="pm scattered" style="top:12px;left:22px;transform:rotate(4deg);z-index:2;width:400px!important;height:300px!important"><img src="img/baby-klein.jpeg"></div>
+<div class="pm scattered" style="top:228px;left:88px;transform:rotate(-3deg);z-index:1;width:355px!important;height:260px!important"><img src="img/pepers-knoflook.jpeg"></div>
 <!-- tiny flower -->
-<svg class="bot" style="bottom:18px;left:18px;width:18px;height:22px;opacity:.06" viewBox="0 0 20 24"><circle cx="10" cy="8" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="7" cy="6" r="1.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="13" cy="6" r="1.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="8" cy="10" r="1.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="12" cy="10" r="1.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><line x1="10" y1="10" x2="10" y2="20" stroke="#2c2c2c" stroke-width="0.7"/></svg>
+<svg class="bot" style="bottom:18px;left:18px;width:18px;height:22px;opacity:.22" viewBox="0 0 20 24"><circle cx="10" cy="8" r="2" fill="#FFA07A" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="7" cy="6" r="1.5" fill="#FF7F50" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="13" cy="6" r="1.5" fill="#FF7F50" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="8" cy="10" r="1.5" fill="#FF7F50" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="12" cy="10" r="1.5" fill="#FF7F50" stroke="#2c2c2c" stroke-width="0.7"/><line x1="10" y1="10" x2="10" y2="20" stroke="#228B22" stroke-width="0.9"/></svg>
 <span class="pn r">12</span>
 </div></div>
 </div>
@@ -253,17 +250,15 @@ body{padding:10px}
 <div class="rs">Dit was jullie allereerste snack. Nog voordat jullie 'mama' konden zeggen, wezen jullie al naar de bananenbos. De geur van bakbana in hete olie, met warme pindakaas erover... zelfs nu nog, als jullie thuiskomen, is dit het eerste wat ik maak.</div>
 <div class="rsec"><h3>Ingrediënten</h3><ul class="il"><li>4 rijpe bakbananen</li><li>Olie om te bakken</li><li>Snufje zout</li><li>200g ongezouten pinda's</li><li>2 teentjes knoflook</li><li>1 Madame Jeanette</li><li>1 tomaat</li><li>1 ui</li><li>200ml water</li><li>Zout naar smaak</li><li>1 el suiker</li></ul></div>
 <div class="rsec"><h3>Bereiding</h3><ol class="sl"><li>Rooster pinda's in droge pan. Maal fijn in blender.</li><li>Fruit ui en knoflook. Voeg tomaat en peper toe.</li><li>Voeg gemalen pinda's en water toe. 15 min pruttelen met zout en suiker.</li><li>Schil bakbananen, snijd schuin in plakken van 1cm.</li><li>Bak goudbruin in hete olie. Serveer warm met pindakaas. Eet smakelijk!</li></ol></div>
-<div class="is"><div class="ii"><img src="img/chilipepers.jpeg"></div><div class="ii"><img src="img/kruiden.jpeg"></div></div>
 <span class="pn l">13</span>
 <!-- cute flying bird -->
-<svg class="bot" style="top:24px;right:20px;width:32px;height:24px;opacity:.08" viewBox="0 0 35 26"><ellipse cx="18" cy="13" rx="7" ry="5" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><ellipse cx="24" cy="11" rx="5" ry="4" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="17" cy="12" r="1.3" fill="#2c2c2c"/><path d="M12,13 Q5,8 3,10 Q5,11 8,13" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><path d="M24,13 Q30,8 32,10 Q30,11 27,13" fill="none" stroke="#2c2c2c" stroke-width="0.8"/><path d="M16,16 L14,20 M20,16 L20,21" stroke="#2c2c2c" stroke-width="0.7"/></svg>
+<svg class="bot" style="top:24px;right:20px;width:32px;height:24px;opacity:.25" viewBox="0 0 35 26"><ellipse cx="18" cy="13" rx="7" ry="5" fill="#FFB347" stroke="#2c2c2c" stroke-width="0.8"/><ellipse cx="24" cy="11" rx="5" ry="4" fill="#FFA07A" stroke="#2c2c2c" stroke-width="0.8"/><circle cx="17" cy="12" r="1.3" fill="#2c2c2c"/><path d="M12,13 Q5,8 3,10 Q5,11 8,13" fill="none" stroke="#FF6347" stroke-width="1"/><path d="M24,13 Q30,8 32,10 Q30,11 27,13" fill="none" stroke="#FF6347" stroke-width="1"/><path d="M16,16 L14,20 M20,16 L20,21" stroke="#FF8C00" stroke-width="0.8"/></svg>
 </div></div>
 <div class="page page-right"><div class="pp">
-<div class="pm" style="flex:1.2"><img src="img/mama-straat.jpeg" style="object-position:center top"></div>
-<div class="pr" style="flex:.8"><div class="ph" style="height:auto"><img src="img/mama-kus.jpeg" style="object-position:center top"></div><div class="ph" style="height:auto"><img src="img/knuffel.jpeg" style="object-position:center top"></div></div>
-<div class="pcap">mama's kabouter — toen en nu</div>
+<div class="pm scattered" style="top:14px;left:16px;transform:rotate(-3deg);z-index:1;width:398px!important;height:298px!important"><img src="img/mama-kus.jpeg"></div>
+<div class="pm scattered" style="top:232px;left:92px;transform:rotate(4deg);z-index:2;width:340px!important;height:250px!important"><img src="img/kruiden.jpeg"></div>
 <!-- flying bird -->
-<svg class="bot" style="top:20px;left:16px;width:26px;height:20px;opacity:.06" viewBox="0 0 28 22"><circle cx="14" cy="10" r="5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="18" cy="9" r="3.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><path d="M10,10 Q5,6 3,8" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><path d="M18,10 Q23,6 25,8" fill="none" stroke="#2c2c2c" stroke-width="0.7"/></svg>
+<svg class="bot" style="top:20px;left:16px;width:26px;height:20px;opacity:.22" viewBox="0 0 28 22"><circle cx="14" cy="10" r="5" fill="#98D8C8" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="18" cy="9" r="3.5" fill="#7FCDBB" stroke="#2c2c2c" stroke-width="0.7"/><path d="M10,10 Q5,6 3,8" fill="none" stroke="#41B6C4" stroke-width="0.9"/><path d="M18,10 Q23,6 25,8" fill="none" stroke="#41B6C4" stroke-width="0.9"/></svg>
 <span class="pn r">14</span>
 </div></div>
 </div>
@@ -276,14 +271,14 @@ body{padding:10px}
 <p>Koken is liefde<br>die je kunt proeven.<br><br>Familie is het<br>geheime ingrediënt.<br><br>En kabouters?<br>Die wensen altijd<br>om nog een bordje.</p>
 <div class="so">— met alle liefde, voor altijd —</div>
 <!-- tiny bird and flower -->
-<svg class="bot" style="top:26px;left:24px;width:24px;height:20px;opacity:.06" viewBox="0 0 26 22"><circle cx="12" cy="8" r="5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="16" cy="7" r="3.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="11" cy="7.5" r="1" fill="#2c2c2c"/></svg>
-<svg class="bot" style="bottom:26px;right:24px;width:20px;height:24px;opacity:.06" viewBox="0 0 22 26"><circle cx="11" cy="8" r="2.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="8" cy="5" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="14" cy="5" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="9" cy="11" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="13" cy="11" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><line x1="11" y1="10" x2="11" y2="22" stroke="#2c2c2c" stroke-width="0.7"/></svg>
+<svg class="bot" style="top:26px;left:24px;width:24px;height:20px;opacity:.15" viewBox="0 0 26 22"><circle cx="12" cy="8" r="5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="16" cy="7" r="3.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="11" cy="7.5" r="1" fill="#2c2c2c"/></svg>
+<svg class="bot" style="bottom:26px;right:24px;width:20px;height:24px;opacity:.15" viewBox="0 0 22 26"><circle cx="11" cy="8" r="2.5" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="8" cy="5" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="14" cy="5" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="9" cy="11" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><circle cx="13" cy="11" r="2" fill="none" stroke="#2c2c2c" stroke-width="0.7"/><line x1="11" y1="10" x2="11" y2="22" stroke="#2c2c2c" stroke-width="0.7"/></svg>
 <span class="pn l">15</span>
 </div>
 </div>
 <div class="page page-right" style="background:#fafaf8">
 <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center">
-<svg width="55" height="45" viewBox="0 0 60 50" style="opacity:.07;margin-bottom:22px"><ellipse cx="15" cy="22" rx="10" ry="7" fill="none" stroke="#2c2c2c" stroke-width="0.6"/><rect x="12" y="22" width="6" height="12" fill="none" stroke="#2c2c2c" stroke-width="0.5" rx="1"/><ellipse cx="30" cy="18" rx="12" ry="9" fill="none" stroke="#2c2c2c" stroke-width="0.6"/><rect x="26" y="18" width="8" height="16" fill="none" stroke="#2c2c2c" stroke-width="0.5" rx="1"/><ellipse cx="47" cy="24" rx="9" ry="6" fill="none" stroke="#2c2c2c" stroke-width="0.6"/><rect x="44" y="24" width="6" height="10" fill="none" stroke="#2c2c2c" stroke-width="0.5" rx="1"/><path d="M2,38 Q15,34 30,36 Q45,34 58,38" fill="none" stroke="#2c2c2c" stroke-width="0.4"/></svg>
+<svg width="55" height="45" viewBox="0 0 60 50" style="opacity:.18;margin-bottom:22px"><ellipse cx="15" cy="22" rx="10" ry="7" fill="none" stroke="#2c2c2c" stroke-width="0.6"/><rect x="12" y="22" width="6" height="12" fill="none" stroke="#2c2c2c" stroke-width="0.5" rx="1"/><ellipse cx="30" cy="18" rx="12" ry="9" fill="none" stroke="#2c2c2c" stroke-width="0.6"/><rect x="26" y="18" width="8" height="16" fill="none" stroke="#2c2c2c" stroke-width="0.5" rx="1"/><ellipse cx="47" cy="24" rx="9" ry="6" fill="none" stroke="#2c2c2c" stroke-width="0.6"/><rect x="44" y="24" width="6" height="10" fill="none" stroke="#2c2c2c" stroke-width="0.5" rx="1"/><path d="M2,38 Q15,34 30,36 Q45,34 58,38" fill="none" stroke="#2c2c2c" stroke-width="0.4"/></svg>
 <h2 style="font-size:16px;color:#bbb">De Wensen van de Kabouters</h2>
 <div style="width:28px;height:.5px;background:#e0e0e0;margin:14px auto"></div>
 <p style="font-family:'Spectral',serif;font-weight:200;font-style:italic;font-size:12px;color:#ccc;line-height:1.8">een kookboek vol liefde,<br>herinneringen &<br>Surinaamse smaken</p>
